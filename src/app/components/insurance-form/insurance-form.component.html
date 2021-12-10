@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <form [formGroup]="insuranceForm" (ngSubmit)="onSubmit()">
+                <div *ngIf="formStep == 1; else elseBlock">
+                    <div class="form-group">                    
+                        <label for="name">Name:</label>
+                        <input id="name" type="text" formControlName="name" class="form-control">
+                        
+                        <label for="age">Age:</label>
+                        <input id="age" type="number" formControlName="age" class="form-control">
+
+                        <label for="dob">Date Of Birth:</label>
+                        <input id="dob" type="text" formControlName="dob" class="form-control">
+                    </div>
+
+                    <button type="button" (click)="incrementFormStep()" [disabled]="isInsuranceFormPartOneValid()" class="btn btn-primary">Next</button>
+                </div>
+
+                <ng-template #elseBlock>
+                    <div class="form-group">
+                        
+                        <label for="occupation">Occupation:</label>
+                        <select id="occupation" formControlName="occupation" class="form-control">
+                            <option *ngFor="let occupation of occupationList">{{occupation}}</option>
+                        </select>
+
+                        <label for="sumInsured">Sum Insured:</label>
+                        <input id="sumInsured" type="number" formControlName="sumInsured" class="form-control">
+
+                        <label for="monthlyExpenses">Monthly Expenses:</label>
+                        <input id="monthlyExpenses" type="number" formControlName="monthlyExpenses" class="form-control">
+
+                        <label for="state">State:</label>
+                        <select id="state" formControlName="state" class="form-control">
+                            <option *ngFor="let state of stateList">{{state}}</option>
+                        </select>
+
+                        <label for="postCode">PostCode:</label>
+                        <input id="postCode" type="text" formControlName="postCode" class="form-control">
+                    </div>
+
+                    <button type="button" (click)="decrementFormStep()" class="btn btn-primary">Back</button>
+                    <button type="submit" [disabled]="!insuranceForm.valid" class="btn btn-primary">Submit</button>
+                    <p *ngIf="total > 0">Total: {{total}}</p>
+                </ng-template>
+            </form>
+        </div>
+    </div>
+</div>
